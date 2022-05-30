@@ -1,15 +1,11 @@
+from constantes import CODIGO_NORMAL
 from fila_base import FilaBase
 
 
 class FilaNormal(FilaBase):
 
     def gerar_senha_atual(self) -> None:
-        self.senhaatual = f"ROD{self.codigo}"
-
-    def atualiza_fila(self) -> None:
-        self.reseta_fila()
-        self.gerar_senha_atual()
-        self.fila.append(self.senhaatual)
+        self.senhaatual = f"{CODIGO_NORMAL}{self.codigo}"
 
     def chama_cliente(self, caixa: int) -> str:
         cliente_atual = self.fila.pop(0)
@@ -24,6 +20,8 @@ class FilaNormal(FilaBase):
             estatistica['dia'] = dia
             estatistica['agencia'] = agencia
             estatistica['clientes_atendidos'] = self.clientes_atendidos
-            estatistica['qtd_clientes_atendidos'] = len(self.clientes_atendidos)
+            estatistica['qtd_clientes_atendidos'] = (
+                len(self.clientes_atendidos)
+            )
 
         return estatistica
