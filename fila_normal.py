@@ -1,30 +1,23 @@
-class FilaNormal:
-    codigo: int = 0
-    fila = []
-    clientes_atendidos = []
-    senhaatual: str = ""
+from fila_base import FilaBase
 
-    def gerar_senha_atual(self)->None:
+
+class FilaNormal(FilaBase):
+
+    def gerar_senha_atual(self) -> None:
         self.senhaatual = f"ROD{self.codigo}"
 
-    def reseta_fila(self)->None:
-        if self.codigo > 100:
-            self.codigo = 0
-        else:
-            self.codigo+=1
-
-    def atualiza_fila(self)->None:
+    def atualiza_fila(self) -> None:
         self.reseta_fila()
         self.gerar_senha_atual()
         self.fila.append(self.senhaatual)
 
-    def chama_cliente(self, caixa: int)->str:
+    def chama_cliente(self, caixa: int) -> str:
         cliente_atual = self.fila.pop(0)
         self.clientes_atendidos.append(cliente_atual)
         return f'cliente atual: {cliente_atual} dirija-se ao caixa {caixa}'
 
-    def estatistica(self, dia: str, agencia: int, flag: str)-> dict:
-        if flag !="detail":
+    def estatistica(self, dia: str, agencia: int, flag: str) -> dict:
+        if flag != "detail":
             estatistica = f'{agencia} - {dia}: {len(self.clientes_atendidos)}'
         else:
             estatistica = {}
