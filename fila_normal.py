@@ -1,3 +1,5 @@
+from typing import Dict, Union, List
+
 from constantes import CODIGO_NORMAL
 from fila_base import FilaBase
 
@@ -13,10 +15,10 @@ class FilaNormal(FilaBase):
         return f'cliente atual: {cliente_atual} dirija-se ao caixa {caixa}'
 
     def estatistica(self, dia: str, agencia: int, flag: str) -> dict:
+        estatistica: Dict[str, Union[str, List[str], int]] = {}
         if flag != "detail":
-            estatistica = f'{agencia} - {dia}: {len(self.clientes_atendidos)}'
+            estatistica[f'{agencia}-{dia}'] =  len(self.clientes_atendidos)
         else:
-            estatistica = {}
             estatistica['dia'] = dia
             estatistica['agencia'] = agencia
             estatistica['clientes_atendidos'] = self.clientes_atendidos
